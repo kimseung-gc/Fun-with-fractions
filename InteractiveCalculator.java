@@ -25,12 +25,12 @@ public class InteractiveCalculator {
       } catch (Exception e) {
         inpScanner.close();
         throw new Exception(e.getMessage(), e.getCause());
-      }
+      } // try/catch
       /* Reading the input from next line. */
       inpObj = inpScanner.nextLine();
-    }
+    } // while
     /* Have to close the stream when opened */
     inpScanner.close();
     pen.close();
   } // main (String[]) throws Exception
-}
+} // class InteractiveCalculator

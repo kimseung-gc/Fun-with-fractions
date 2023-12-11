@@ -12,6 +12,6 @@ public class QuickCalculator {
     for(int i = 0; i < args.length; i++){
       String currentObj = args[i];
       calcFunc.store(currentObj);
-    }
+    } // for
   } // main (String[]) throws Exception
-}
+} // class QuickCalculator

@@ -7,7 +7,13 @@ import java.io.PrintWriter;
  */
 public class CalculatorFunctions {
 
+  /**
+   * PrintWriter for the calculators to display
+   */
   PrintWriter pen;
+  /**
+   * Calculator
+   */
   BFCalculator calc;
 
   // +--------------+-------------------------------------------------
@@ -44,17 +50,17 @@ public class CalculatorFunctions {
         if(reg.length == 1){
           calc.store(reg[0]);
           pen.println("Variable \'" + reg[0] + "\' successfully stored as " + calc.getReg(reg[0]));
-        }
+        } // if
         /* When the register's name is invalid due to multiple characters */
         else{
           throw new Exception("Invalid storage (variable name can be only a single letter)");
-        }
-      }
+        } // else
+      } // if
       /* When there too many/little inputs*/
       else{
         throw new Exception("Invalid storage (too many/little inputs)");
-      }
-    }
+      } // else
+    } // if
     /* When RESET, reinitialize the BFCalculator class which will wipe out the stored arrays */
     else if(inpObj.contains("RESET")){
       this.calc = new BFCalculator();
@@ -62,6 +68,6 @@ public class CalculatorFunctions {
       /* When it is not STORE or RESET, evaluate the expresssion. */
       BigFraction num = calc.evaluate(inpObj);
       pen.println(num);
-    }
+    } // if/else
   }// store(String, BFCalculator, PrintWriter)
-}
+} // class CalculatorFunctions
