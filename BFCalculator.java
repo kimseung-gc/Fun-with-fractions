@@ -341,6 +341,11 @@ public class BFCalculator {
     } // try/catch
   } // evaluate(String)
 
+  /**
+   * retrieves the register
+   * @param register
+   * @throws Exception
+   */
   public String getReg(char register) throws Exception {
     int regIndex = indexOfReg(register);
     if (regIndex == -1) {
