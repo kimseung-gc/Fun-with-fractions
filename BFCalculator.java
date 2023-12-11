@@ -2,7 +2,7 @@
  * A calculator with its functions for latter programs
  * 
  * @author Seunghyeon (Hyeon) Kim
- * @version 1 of Sep. 2023
+ * @version 2 of Dec. 2023
  */
 public class BFCalculator {
   // +--------+-------------------------------------------------------

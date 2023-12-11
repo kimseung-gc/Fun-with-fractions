@@ -5,10 +5,11 @@ import java.io.PrintWriter;
  * A calculator interactively taking in inputs.
  * 
  * @author Seunghyeon (Hyeon) Kim
+ * @version 2 of Dec. 2023
  */
 
 public class InteractiveCalculator {
-  public static void main(String[] args) throws Exception{
+  public static void main(String[] args) throws Exception {
     /* Initialization of variables and classes */
     PrintWriter pen = new PrintWriter(System.out, true);
     /* Similar to scanf in C */
@@ -19,7 +20,7 @@ public class InteractiveCalculator {
     /* Initialize the calculator from the factored out codes. */
     CalculatorFunctions calcFunc = new CalculatorFunctions(pen);
     /* In case of QUIT or EXIT, the loop will end. */
-    while(!inpObj.equals("QUIT") && !inpObj.equals("EXIT")){
+    while (!inpObj.equals("QUIT") && !inpObj.equals("EXIT")) {
       try {
         calcFunc.store(inpObj);
       } catch (Exception e) {
