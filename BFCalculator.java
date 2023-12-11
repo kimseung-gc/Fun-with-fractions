@@ -57,25 +57,25 @@ public class BFCalculator {
    * @return String
    */
   private String stringRecombine(String[] strLs, String regex) {
-    /* declaring an empty String */
+    // declaring an empty String
     String ret = "";
-    /* When the given list is null, return an empty String */
+    // When the given list is null, return an empty String
     if (strLs == null) {
       return ret;
     } // if
-    /*
+    /**
      * When the given list is not empty, start merging them
      * into ret.
      */
     for (int i = 0; i < strLs.length; i++) {
-      /*
+      /**
        * When it is the last element in the list, do not add
        * any regex.
        */
       if (i == strLs.length - 1) {
         ret += strLs[i];
       } // if
-      /*
+      /**
        * Otherwise, add regexes for each and every end of the
        * String elements in the array.
        */
@@ -99,20 +99,20 @@ public class BFCalculator {
    * @return String[]
    */
   private String[] subArrStr(String[] arr, int start, int end) {
-    /*
+    /**
      * When invalid input is given for the indices, return an empty
      * array.
      */
     if (end <= start) {
       return null;
     } // if
-    /* Otherwise, initialize an array with length end-start */
+    // Otherwise, initialize an array with length end-start
     String[] ret = new String[end - start];
-    /* Copy the elements from index start to end-1. */
+    // Copy the elements from index start to end-1.
     for (int i = start; i < end; i++) {
       ret[i - start] = arr[i];
     } // for
-    /* Return the resultant array */
+    // Return the resultant array
     return ret;
   } // subArrStr (String[], int, int)
 
@@ -127,21 +127,21 @@ public class BFCalculator {
    * @return String
    */
   private String replaceReg(String exp, char reg, BigFraction Num) {
-    /* Checking wehther the string contains the variable this.reg. */
+    // Checking wehther the string contains the variable this.reg.
     if (exp.contains(Character.toString(reg))) {
-      /*
+      /**
        * Declaring a temporary variable that takes the expression,
        * exp, as a char array.
        */
       char[] temp = exp.toCharArray();
-      /*
+      /**
        * Declaring an empty String that will be returned after
        * replacing the registers.
        */
       String ret = "";
-      /* Looping around to check where the register is. */
+      // Looping around to check where the register is.
       for (int i = 0; i < temp.length; i++) {
-        /*
+        /**
          * When register is found, replace the register with the
          * fraction that was stored. Otherwise, copy the original
          * expression.
@@ -154,7 +154,7 @@ public class BFCalculator {
       } // for
       return ret;
     } // if
-    /*
+    /**
      * If there is no variable found, then it will return the original
      * expression.
      */
@@ -169,26 +169,26 @@ public class BFCalculator {
    * @return int
    */
   private int indexOfReg(char ch) {
-    /*
+    /**
      * When register is empty, return -1 as there are no register
      * existent
      */
     if (regIsEmpty()) {
       return -1;
     } // if
-    /*
+    /**
      * When register is not empty, search through the register array
      * to look for the index of the register.
      */
     for (int i = 0; i < this.reg.length; i++) {
-      /*
+      /**
        * When the register is found, return the index of the register
        */
       if (this.reg[i] == ch) {
         return i;
       } // if
     } // for
-    /* When register is not found, also return -1 */
+    // When register is not found, also return -1
     return -1;
   } // indexOfReg (char)
 
@@ -208,20 +208,20 @@ public class BFCalculator {
       throw new IllegalArgumentException(
           "Non-existent previous calculation or previous calculation NaN");
     } // if
-    /* Finding the index of register. */
+    // Finding the index of register.
     int ind = indexOfReg(register);
-    /* If there exists an existing register. */
+    // If there exists an existing register.
     if (ind != -1) {
-      /* Overwrite the existent register */
+      // Overwrite the existent register
       this.reg_frac[ind] = prev;
       return;
     } // if
-    /* When the register is empty */
+    // When the register is empty
     if (regIsEmpty()) {
-      /* Increase the this.reg's length to 1 */
+      // Increase the this.reg's length to 1
       this.reg = new char[1];
       this.reg[0] = register;
-      /* Increase the this.reg_frac's length to 1 */
+      // Increase the this.reg_frac's length to 1
       this.reg_frac = new BigFraction[1];
       this.reg_frac[0] = prev;
       return;
@@ -255,12 +255,12 @@ public class BFCalculator {
    */
   private BigFraction evaluate_helper(String exp) throws IllegalArgumentException {
     String regex = " ";
-    /*
+    /**
      * declaring tempExp as exp (the expression that will be evaluated)
      */
     String tempExp = exp;
     if (!regIsEmpty()) {
-      /*
+      /**
        * replacing the various registers in exp with the registered
        * fractions.
        */
@@ -269,54 +269,54 @@ public class BFCalculator {
       } // for
     } // if
     String[] tempArr = tempExp.split(regex);
-    /* Initializing leftOver String as an empty String */
+    // Initializing leftOver String as an empty String
     String leftOver = "";
     int count = 0;
-    /* It starts from the last index for the associativity problems */
+    // It starts from the last index for the associativity problems
     for (int i = tempArr.length - 1; i >= 0; i--) {
       if (count > 2) {
-        /*
+        /**
          * Throwing error when there is no operational clause in
          * between numbers
          */
         throw new IllegalArgumentException("Two numbers in a row! Please split them.");
       } // if
-      /*
+      /**
        * Recombining the sub array containing from index 0 to i-1 of
        * tempArr for recursive processing.
        */
       leftOver = stringRecombine(subArrStr(tempArr, 0, i), regex);
       if (tempArr[i].equals("+")) {
-        /* In case when there is addition */
+        // In case when there is addition
         return (evaluate_helper(leftOver)).add(new BigFraction(tempArr[i + 1]));
       } else if (tempArr[i].equals("-")) {
-        /* In case when there is subtraction */
+        // In case when there is subtraction
         return (evaluate_helper(leftOver)).subtract(new BigFraction(tempArr[i + 1]));
       } else if (tempArr[i].equals("*")) {
-        /* In case when there is multiplication */
+        // In case when there is multiplication
         return (evaluate_helper(leftOver)).multiply(new BigFraction(tempArr[i + 1]));
       } else if (tempArr[i].equals("/")) {
-        /* In case when there is division */
+        // In case when there is division
         return (evaluate_helper(leftOver)).divide(new BigFraction(tempArr[i + 1]));
       } // if/else
-      /* For latter error catches. */
+      // For latter error catches.
       if (tempArr.length != 1) {
         count++;
       } // if
-      /* In case the fraction expression is improper */
+      // In case the fraction expression is improper
       if (((tempArr[i].charAt(0)) == '/' ||
           (tempArr[i].charAt(tempArr[i].length() - 1) == '/'))) {
         throw new IllegalArgumentException("Invalid format!");
       } // if
     } // for
-    /*
+    /**
      * When there are two numbers in a row, the count will be 1 instead
      * of 0.
      */
     if (count == 1) {
       throw new IllegalArgumentException("Two numbers in a row! Please split them.");
     } // if
-    /* Default case when there is no other expression left to evaluate */
+    // Default case when there is no other expression left to evaluate
     return new BigFraction(tempArr[0]);
   } // evaluate_helper (String) throws IllegalArgumentException
 
@@ -329,14 +329,14 @@ public class BFCalculator {
    */
   public BigFraction evaluate(String exp) {
     try {
-      /* Storing the value of output of evaluate_helper(exp) */
+      // Storing the value of output of evaluate_helper(exp)
       this.prev = evaluate_helper(exp);
-      /* Returning the value */
+      // Returning the value
       return this.prev;
     } catch (IndexOutOfBoundsException ex) {
       throw new Error("Input correct expression please!");
     } catch (Exception e) {
-      /* When there is an error, return an error message. */
+      // When there is an error, return an error message.
       throw new Error(e.getMessage());
     } // try/catch
   } // evaluate(String)
