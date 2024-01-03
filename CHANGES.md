@@ -1,4 +1,4 @@
-# MP02: Fun with Fractions
+# Fun with Fractions
 
 ## Change Log
 
