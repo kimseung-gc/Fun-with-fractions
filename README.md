@@ -1,4 +1,4 @@
-# MP02: Fun with Fractions
+# Fun with Fractions
 
 ## Groups
 ```
@@ -22,6 +22,27 @@ InteractiveCalculator.java
 QuickCalculator.java
 CHANGES.md
 README.md
+```
+
+## How to Compile
+```
+javac -d bin/ *.java
+```
+
+## How to Run
+
+### Quick Calculator
+```
+java -cp bin QuickCalculator <command 1> <command 2> ...
+
+<command n>: These commands can be any valid commands to give the calculator. 
+The valid options are any of the four basic mathematical operands that requires
+evaluation, storing variables, "QUIT"/"EXIT", and "RESET."
+```
+
+### Interactive Calculator
+```
+java -cp bin InteractiveCalculator
 ```
 
 ## Acknowledgements
